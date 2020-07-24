@@ -4,9 +4,10 @@ import "github.com/spf13/viper"
 
 // Config is used to store all the application configuration values
 type Config struct {
-	logLevel  string
-	logFormat string
-	docsPath  string
+	logLevel       string
+	logFormat      string
+	docsPath       string
+	postgresConfig PostgresConfig
 }
 
 // New creates the config from environment or config file
@@ -27,9 +28,10 @@ func NewWithViper() *viper.Viper {
 
 func LoadConfig(vp *viper.Viper) Config {
 	return Config{
-		logLevel:  getString(vp, "log_level", "debug"),
-		logFormat: getString(vp, "log_format", "json"),
-		docsPath:  getString(vp, "docs_path"),
+		logLevel:       getString(vp, "log_level", "debug"),
+		logFormat:      getString(vp, "log_format", "json"),
+		docsPath:       getString(vp, "docs_path"),
+		postgresConfig: getPostgresConfig(vp),
 	}
 }
 
@@ -39,4 +41,8 @@ func (c Config) LogLevel() string {
 
 func (c Config) LogFormat() string {
 	return c.logFormat
+}
+
+func (c Config) Postgres() PostgresConfig {
+	return c.postgresConfig
 }

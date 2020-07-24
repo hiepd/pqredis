@@ -1,0 +1,11 @@
+LOG_LEVEL: "debug"
+LOG_FORMAT: "plaintext"
+
+DB_HOST: "localhost"
+DB_PORT: 5430
+DB_NAME: "pqredis_dev"
+DB_USER: "postgres"
+DB_PASSWORD: "postgres"
+DB_MAXPOOLSIZE: 10
+
+DOCS_PATH: "./docs"
