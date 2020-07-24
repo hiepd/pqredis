@@ -1,20 +1,17 @@
 package main
 
 import (
-	"pqredis/config"
-	"pqredis/monitoring/logger"
-	"pqredis/postgres"
+	"fmt"
+	"pqredis/cmd"
+)
+
+var (
+	version = "0.0.1"
+	commit  = "n/a"
 )
 
 func main() {
-	l := logger.New(config.New())
-	l.Infof("hello pqredis")
-
-	cfg := config.New()
-	_, err := postgres.New(cfg, l)
-	if err != nil {
-		l.Errorf(err.Error())
-	} else{
-		l.Infof("DB is set up")
-	}
+	cli := cmd.NewCLI()
+	cli.Version = fmt.Sprintf("%s (Commit: %s)", version, commit)
+	cli.Execute()
 }
